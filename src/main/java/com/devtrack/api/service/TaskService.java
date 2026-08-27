@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 
 @Service
 public class TaskService {
@@ -36,7 +38,7 @@ public class TaskService {
 
     public List<Task> getTasks() {
         return tasks;
-    }
+}
 
     public Task getTaskById(Long id) {
     for (Task task : tasks) {
@@ -72,4 +74,32 @@ public class TaskService {
     );
 }
 
+public void deleteTask(Long id) {
+/*     for (Task task : tasks) {
+        if (task.getId().equals(id)) {
+            tasks.remove(task);
+            return;
+        }
+    }
+    throw new ResponseStatusException(
+            HttpStatus.NOT_FOUND,
+            "Task not found"
+    );
+    Επικίνδυνο (ρίχνει ConcurrentModificationException αν συνεχιστεί το loop)   */
+
+    Iterator<Task> iterator = tasks.iterator();
+    while (iterator.hasNext()) {
+        Task task = iterator.next();
+        if (task.getId().equals(id)) {
+            iterator.remove();
+            return;
+        }
+    }
+    throw new ResponseStatusException(
+            HttpStatus.NOT_FOUND,
+            "Task not found"
+    );
 }
+
+}
+

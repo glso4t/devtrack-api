@@ -25,7 +25,7 @@ public class TaskService {
         task2.setTitle("Learn SQL");
         task2.setDescription("Practice SQL queries");
         task2.setCompleted(true);
-        task1.setCreatedAt(null);
+        task2.setCreatedAt(null);
 
 
         tasks.add(task1);
@@ -33,4 +33,9 @@ public class TaskService {
 
         return tasks;
     }
+
+    public Task createTask(Task task) {
+    return task;
+}
+
 }

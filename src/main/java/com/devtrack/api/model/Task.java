@@ -9,7 +9,7 @@ public class Task {
     private Long id;
     private String title;
     private String description;
-    private boolean completed;
+    private Boolean completed;
     private LocalDateTime createdAt;
 
         public Long getId() {
@@ -36,7 +36,7 @@ public class Task {
         this.description = description;
     }
 
-    public boolean isCompleted() {
+    public Boolean getCompleted() {
         return completed;
     }
 

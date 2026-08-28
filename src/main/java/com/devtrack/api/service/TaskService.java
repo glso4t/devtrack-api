@@ -63,8 +63,32 @@ public class TaskService {
         if (task.getId().equals(id)) {
             task.setTitle(updatedTask.getTitle());
             task.setDescription(updatedTask.getDescription());
-            task.setCompleted(updatedTask.isCompleted());
+            task.setCompleted(updatedTask.getCompleted());
             task.setCreatedAt(updatedTask.getCreatedAt());
+            return task;
+        }
+    }
+    throw new ResponseStatusException(
+            HttpStatus.NOT_FOUND,
+            "Task not found"
+    );
+}
+
+public Task patchTask(Long id, Task updatedTask) {
+    for (Task task : tasks) {
+        if (task.getId().equals(id)) {
+            if (updatedTask.getTitle() != null) {
+                task.setTitle(updatedTask.getTitle());
+            }
+            if (updatedTask.getDescription() != null) {
+                task.setDescription(updatedTask.getDescription());
+            }
+            if (updatedTask.getCompleted() != null) {
+                task.setCompleted(updatedTask.getCompleted());
+            }
+            if(updatedTask.getCreatedAt() != null){
+                task.setCreatedAt(updatedTask.getCreatedAt());
+            }
             return task;
         }
     }

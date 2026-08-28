@@ -5,6 +5,7 @@ import com.devtrack.api.service.TaskService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -45,6 +46,13 @@ public class TaskController {
         @PathVariable Long id,
         @RequestBody Task task) {
     return taskService.updateTask(id, task);
+}
+    @PatchMapping("/api/v1/tasks/{id}")
+    public Task patchTask(
+        @PathVariable Long id,
+        @RequestBody Task updatedTask) {
+
+    return taskService.patchTask(id, updatedTask);
 }
 
     @DeleteMapping("/api/v1/tasks/{id}")

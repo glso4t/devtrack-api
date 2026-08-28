@@ -1,6 +1,17 @@
 package com.devtrack.api.repository;
 
 import com.devtrack.api.model.Task;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TaskRepository
+        extends JpaRepository<Task, Long> {
+}
+
+
+/*--Manually before JPA--
+package com.devtrack.api.repository;
+
+import com.devtrack.api.model.Task;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -64,7 +75,7 @@ public class TaskRepository {
             HttpStatus.NOT_FOUND,
             "Task not found"
     );
-    Επικίνδυνο (ρίχνει ConcurrentModificationException αν συνεχιστεί το loop)   */
+    Επικίνδυνο (ρίχνει ConcurrentModificationException αν συνεχιστεί το loop)   *//* 
         Iterator<Task> iterator = tasks.iterator();
         while (iterator.hasNext()) {
             Task task = iterator.next();
@@ -74,4 +85,4 @@ public class TaskRepository {
             }
         }
     }
-}
+}*/

@@ -1,9 +1,20 @@
 package com.devtrack.api.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+
 public class TaskUpdateRequest {
 
+    @Size(min = 3, max = 100)
     private String title;
+    
+    @Size(
+        max = 500,
+        message = "Description cannot exceed 500 characters"
+    )
     private String description;
+    
     private Boolean completed;
 
     public TaskUpdateRequest() {

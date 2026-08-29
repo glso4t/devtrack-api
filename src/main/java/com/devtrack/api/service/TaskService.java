@@ -39,14 +39,7 @@ public class TaskService {
     public List<TaskResponse> getAllTasks() {
         List<TaskResponse> responses = new ArrayList<>();
         for (Task task : taskRepository.findAll()) {
-            TaskResponse response = new TaskResponse(
-                    task.getId(),
-                    task.getTitle(),
-                    task.getDescription(),
-                    task.getCompleted(),
-                    task.getCreatedAt()
-            );
-            responses.add(response);
+            responses.add(toResponse(task));
         }
         return responses;
         /*--Before DTOs--

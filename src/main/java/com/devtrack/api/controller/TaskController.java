@@ -6,6 +6,8 @@ import com.devtrack.api.dto.TaskUpdateRequest;
 //import com.devtrack.api.model.Task;
 import com.devtrack.api.service.TaskService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -34,7 +36,7 @@ public class TaskController {
     }
 
     //GET
-    @GetMapping("/api/v1/tasks")
+    @GetMapping
     public List<TaskResponse> getAllTasks() {
         return taskService.getAllTasks();
 }
@@ -46,9 +48,11 @@ public class TaskController {
 }
 
     //POST
-    @PostMapping("/api/v1/tasks")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED) //201 Created
-    public TaskResponse createTask(@RequestBody TaskCreateRequest task) {
+    public TaskResponse createTask(
+        @Valid @RequestBody TaskCreateRequest task) {
+
     return taskService.createTask(task);
 }
 
@@ -56,7 +60,7 @@ public class TaskController {
     @PutMapping("/{id}")
     public TaskResponse updateTask(
         @PathVariable Long id,
-        @RequestBody TaskUpdateRequest task) {
+        @Valid @RequestBody TaskUpdateRequest task) {
     return taskService.updateTask(id, task);
 }
 
@@ -64,7 +68,7 @@ public class TaskController {
     @PatchMapping("/{id}")
     public TaskResponse patchTask(
         @PathVariable Long id,
-        @RequestBody TaskUpdateRequest updatedTask) {
+        @Valid @RequestBody TaskUpdateRequest updatedTask) {
     return taskService.patchTask(id, updatedTask);
 }
 

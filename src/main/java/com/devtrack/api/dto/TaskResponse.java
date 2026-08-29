@@ -1,35 +1,33 @@
-package com.devtrack.api.model;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+package com.devtrack.api.dto;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.CreationTimestamp;
+public class TaskResponse {
 
-@Entity
-public class Task {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
-
     private String description;
-
     private Boolean completed;
-
-    @CreationTimestamp // Από το Hibernate
     private LocalDateTime createdAt;
 
-
-        public Task() {
+    public TaskResponse() {
     }
 
-        public Long getId() {
+    public TaskResponse(
+            Long id,
+            String title,
+            String description,
+            Boolean completed,
+            LocalDateTime createdAt) {
+
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.completed = completed;
+        this.createdAt = createdAt;
+    }
+
+    public Long getId() {
         return id;
     }
 
@@ -60,6 +58,7 @@ public class Task {
     public void setCompleted(Boolean completed) {
         this.completed = completed;
     }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -67,5 +66,4 @@ public class Task {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-
 }

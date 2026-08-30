@@ -3,11 +3,12 @@ package com.devtrack.api.service;
 import com.devtrack.api.dto.TaskCreateRequest;
 import com.devtrack.api.dto.TaskResponse;
 import com.devtrack.api.dto.TaskUpdateRequest;
+import com.devtrack.api.exception.TaskNotFoundException;
 import com.devtrack.api.model.Task;
 import com.devtrack.api.repository.TaskRepository;
-import org.springframework.http.HttpStatus;
+//import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+//import org.springframework.web.server.ResponseStatusException;
 
 //import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -51,10 +52,7 @@ public class TaskService {
     public TaskResponse getTaskById(Long id) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() ->
-                        new ResponseStatusException(
-                                HttpStatus.NOT_FOUND,
-                                "Task not found"
-                        )
+                        new TaskNotFoundException(id)
                 );
         return toResponse(task);
     }
@@ -108,10 +106,7 @@ public class TaskService {
     public TaskResponse updateTask(Long id, TaskUpdateRequest request) {
         Task existingTask = taskRepository.findById(id)
                 .orElseThrow(() ->
-                        new ResponseStatusException(
-                                HttpStatus.NOT_FOUND,
-                                "Task not found"
-                        )
+                        new TaskNotFoundException(id)
                 );
         existingTask.setTitle(request.getTitle());
         existingTask.setDescription(request.getDescription());
@@ -138,10 +133,7 @@ public class TaskService {
     public TaskResponse patchTask(Long id, TaskUpdateRequest request) {
         Task existingTask = taskRepository.findById(id)
             .orElseThrow(() ->
-                    new ResponseStatusException(
-                            HttpStatus.NOT_FOUND,
-                            "Task not found"
-                    )
+                    new TaskNotFoundException(id)
             );
         if (request.getTitle() != null) {
             existingTask.setTitle(request.getTitle());
@@ -181,10 +173,7 @@ public class TaskService {
     //DELETE
     public void deleteTask(Long id) {
         if (!taskRepository.existsById(id)) {
-            throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND,
-                "Task not found"
-            );
+            throw new TaskNotFoundException(id);
         }
         taskRepository.deleteById(id);
         /*--Manually before JPA--

@@ -21,7 +21,7 @@ WORKDIR /app
 
 # Copy the built JAR from the builder stage
 #Το --from=builder λέει:«Μην ψάξεις στο GitHub build context. Πήγαινε στο προηγούμενο Docker stage που ονομάζεται builder"
-COPY --from=builder /apptarget/*.jar app.jar
+COPY --from=builder /app/target/*.jar app.jar
 
 # Λέμε στο container ποια θύρα χρησιμοποιεί το API
 EXPOSE 8080

@@ -25,5 +25,5 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Run tests
-        run: bash ./mvnw --batch-mode test
+      - name: Build and verify
+        run: bash ./mvnw --batch-mode verify
